@@ -1,0 +1,14 @@
+version: '3'
+services:
+    runner:
+        build: .
+        ports:
+            - '8080:8080'
+        volumes:
+            # mount './exec' host dir to '/mount' container dir
+            - './exec:/mount'
+        networks:
+            - appnet
+networks:
+    appnet:
+        driver: bridge

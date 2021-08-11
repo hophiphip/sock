@@ -1,0 +1,31 @@
+<html>
+  <head></head>
+  <body>
+    <div id="messages">
+      <ul id="log-list"></ul>
+    </div>
+
+    <div id="scripts">
+      <script>
+        function addLog(msg) {
+          var logMessage = document.createElement("li");
+          logMessage.appendChild(document.createTextNode(msg));
+
+          document.getElementById('log-list').appendChild(logMessage);
+        }
+
+        // setup websocket with callbacks
+        var ws = new WebSocket('ws://localhost:8080/');
+        ws.onopen = function() {
+          console.log('Connected');
+        };
+        ws.onclose = function() {
+          console.log('Disconnected');
+        };
+        ws.onmessage = function(event) {
+          addLog(event.data);
+        };
+      </script>
+    </div>
+  </body>
+</html>
