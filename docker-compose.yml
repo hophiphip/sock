@@ -5,7 +5,7 @@ services:
         ports:
             - '8080:8080'
         volumes:
-            # mount './exec' host dir to '/mount' container dir
+            # mount 'exec' host dir to '/mount' container dir
             - './exec:/mount'
         networks:
             - appnet

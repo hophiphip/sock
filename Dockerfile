@@ -37,5 +37,4 @@ RUN apk add libc6-compat
 
 EXPOSE ${APP_PORT}
 
-#CMD [ "ls", "../mount" ] 
-#CMD [ "sh", "-c", "./websocketd --port=$APP_PORT --address=0.0.0.0 ../mount/exec.sh" ]
+CMD [ "sh", "-c", "./websocketd --port=$APP_PORT --address=0.0.0.0 ../mount/exec.sh" ]
