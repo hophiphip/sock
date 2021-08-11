@@ -1,37 +1,20 @@
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+
   <body>
-    <div contenteditable="true">
-      #!/bin/sh
-      </br>
-      ls
+
+    <header id="messages-header">Logs</header>
+    <div id="messages">
+      <ul id="log-list">
+      </ul>
     </div>
 
-    <div id="messages">
-      <ul id="log-list"></ul>
-    </div>
+    <button id="upd">Update</button>
 
     <div id="scripts">
-      <script>
-        function addLog(msg) {
-          var logMessage = document.createElement("li");
-          logMessage.appendChild(document.createTextNode(msg));
-
-          document.getElementById('log-list').appendChild(logMessage);
-        }
-
-        // setup websocket with callbacks
-        var ws = new WebSocket('ws://localhost:8080/');
-        ws.onopen = function() {
-          console.log('Connected');
-        };
-        ws.onclose = function() {
-          console.log('Disconnected');
-        };
-        ws.onmessage = function(event) {
-          addLog(event.data);
-        };
-      </script>
+      <script type="module" src="./js/main.js"></script>
     </div>
   </body>
 </html>
