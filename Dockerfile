@@ -27,7 +27,7 @@ RUN find . ! '(' -name 'websocketd' -o -name 'mount' ')' -type f -exec rm -f {} 
 #       libc.so.6 => /lib64/ld-linux-x86-64.so.2 (0x7f8fac100000)
 #
 # Explanation:
-#   Websocketd was compiled agains glibc. Alpine linux only provides uclibc.
+#   Websocketd was compiled against glibc. Alpine linux only provides uclibc.
 # 
 # Solution:
 RUN apk add libc6-compat
