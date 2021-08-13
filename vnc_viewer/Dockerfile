@@ -8,9 +8,12 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y firefo
 RUN echo "exec firefox" > ~/.xinitrc && chmod +x ~/.xinitrc
 
 RUN git clone https://github.com/novnc/noVNC
+
 WORKDIR ./noVNC
+COPY run.sh .
 
 EXPOSE 5900
 EXPOSE 6080
 
 CMD ["/bin/sh", "-c", "x11vnc -create -forever & ./utils/novnc_proxy --vnc 127.0.0.1:5900 && fg"]
+#CMD ["/bin/sh", "-c", "./sockd -script=./run.sh"]
