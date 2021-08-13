@@ -12,8 +12,15 @@ RUN git clone https://github.com/novnc/noVNC
 WORKDIR ./noVNC
 COPY run.sh .
 
-EXPOSE 5900
+# NOTE: No need to access VNC directly, use noVNC 
+#EXPOSE 5900
+
 EXPOSE 6080
 
-CMD ["/bin/sh", "-c", "x11vnc -create -forever & ./utils/novnc_proxy --vnc 127.0.0.1:5900 && fg"]
-#CMD ["/bin/sh", "-c", "./sockd -script=./run.sh"]
+# NOTE: Left here for the reference
+#CMD ["/bin/sh", "-c", "x11vnc -create -forever & ./utils/novnc_proxy --vnc 127.0.0.1:5900 && fg"]
+
+CMD ["/bin/sh", "-c", "./run.sh"]
+
+# NOTE: On hold till sockd statically compiled release
+#CMD ["/bin/sh", "-c", "./sockd -address=0.0.0.0 -port=7070 -script=./run.sh"]

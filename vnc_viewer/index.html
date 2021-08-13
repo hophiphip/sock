@@ -12,12 +12,20 @@
                 display:block;
                 margin: 0 auto;
             }
+
+            .link {
+                text-align: center;
+                display: block;
+                margin: 20px auto;
+            }
         </style>
     </head>
     <body>
-        <h1 class="heading"> Container VNC View </h1>
+        <h1 class="heading">Application Preview</h1>
 
         <!-- TODO: Just a hardcoded string: find a way to pass URL from container to HOST -->
         <iframe class="vnc" src="http://localhost:6080/vnc.html?host=localhost&port=6080" title="Container VNC" width="70%" height="70%"></iframe>
+
+         <a class="link" href="http://localhost:6080/vnc.html?host=localhost&port=6080" target="_blank">Link to the application</a> 
     </body>
 </html>
