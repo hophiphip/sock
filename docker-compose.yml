@@ -1,12 +1,19 @@
 version: '3'
 services:
-    runner:
-        build: .
+    std_streams:
+        build: ./std_streams
         ports:
             - '8080:8080'
         volumes:
             # mount 'exec' host dir to '/mount' container dir
-            - './exec:/mount'
+            - './std_streams/exec:/mount'
+        networks:
+            - appnet
+    vnc_viewer:
+        build: ./vnc_viewer
+        ports:
+            - '5900:5900'
+            - '6080:6080'
         networks:
             - appnet
 networks:

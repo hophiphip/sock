@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <style>
+            .heading {
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .vnc {
+                /* center horizontally */
+                display:block;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="heading"> Container VNC View </h1>
+
+        <!-- TODO: Just a hardcoded string: find a way to pass URL from container to HOST -->
+        <iframe class="vnc" src="http://localhost:6080/vnc.html?host=localhost&port=6080" title="Container VNC" width="70%" height="70%"></iframe>
+    </body>
+</html>

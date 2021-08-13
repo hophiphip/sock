@@ -37,4 +37,4 @@ RUN apk add libc6-compat
 
 EXPOSE ${APP_PORT}
 
-CMD [ "sh", "-c", "cp ../mount/exec.sh script.sh && ./sockd" ]
+CMD [ "sh", "-c", "./sockd -address=0.0.0.0 -port=$APP_PORT -script=../mount/exec.sh" ]
