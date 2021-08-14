@@ -6,14 +6,16 @@ ENV DISPLAY=:20      \
 
 RUN mkdir /app
 WORKDIR /app
+COPY run.sh .
+RUN chmod +x run.sh
 
 RUN \ 
     echo "http://dl-3.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --no-cache --update \ 
-    firefox-esr \
-    x11vnc      \
-    xvfb        \
-    git         \
+    firefox-esr  \
+    x11vnc       \
+    xvfb         \
+    git          \
     novnc
 
 RUN echo "exec firefox" > .xinitrc && chmod +x .xinitrc
@@ -23,4 +25,4 @@ RUN echo "exec firefox" > .xinitrc && chmod +x .xinitrc
 
 EXPOSE 6080
 
-CMD ["/bin/sh", "-c", "x11vnc -create -forever & novnc_server --vnc 127.0.0.1:5900 && fg"]
+CMD ["/bin/sh", "-c", "./run.sh"]
