@@ -3,6 +3,7 @@ services:
     std_streams:
         build: ./std_streams
         ports:
+            # container:8080 -> host:8080
             - '8080:8080'
         volumes:
             - './std_streams/exec:/mount'
@@ -11,13 +12,15 @@ services:
     vnc_viewer:
         build: ./vnc_viewer
         ports:
+            # container:6080 -> host:6080
             - '6080:6080'
         networks:
             - appnet
     qemu_viewer:
         build: ./qemu_viewer
         ports:
-            - '6080:6080'
+            # container:6080 -> host:6090
+            - '6080:6090'
         networks:
             - appnet
 networks:
