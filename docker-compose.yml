@@ -11,7 +11,12 @@ services:
     vnc_viewer:
         build: ./vnc_viewer
         ports:
-            #- '5900:5900'
+            - '6080:6080'
+        networks:
+            - appnet
+    qemu_viewer:
+        build: ./qemu_viewer
+        ports:
             - '6080:6080'
         networks:
             - appnet
