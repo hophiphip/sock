@@ -6,6 +6,8 @@ ENV DISPLAY=:20      \
 
 RUN mkdir /app
 WORKDIR /app
+
+# NOTE: Clone from github or build locally (requires a compiler)
 COPY boot.bin .
 
 RUN \ 
