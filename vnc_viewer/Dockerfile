@@ -20,9 +20,6 @@ RUN \
 
 RUN echo "exec firefox" > .xinitrc && chmod +x .xinitrc
 
-# NOTE: No need to access x11 VNC directly, use noVNC 
-#EXPOSE 5900
-
 EXPOSE 6080
 
 CMD ["/bin/sh", "-c", "./run.sh"]

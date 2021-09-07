@@ -7,7 +7,6 @@ ENV DISPLAY=:20      \
 RUN mkdir /app
 WORKDIR /app
 
-# NOTE: Clone from github or build locally (requires a compiler)
 COPY boot.bin .
 
 RUN \ 
@@ -19,11 +18,6 @@ RUN \
     git                         \
     novnc
 
-RUN echo "exec qemu-system-x86_64 -drive format=raw,file=boot.bin" > .xinitrc && chmod +x .xinitrc
-
-# NOTE: No need to access x11 VNC directly, use noVNC 
-#EXPOSE 5900
-
 EXPOSE 6080
 
-CMD ["/bin/sh", "-c", "x11vnc -create -forever & novnc_server --vnc 127.0.0.1:5900 && fg"]
+CMD ["/bin/sh", "-c", "qemu-system-x86_64  -drive format=raw,file=/app/boot.bin -vnc :0 & novnc_server --vnc 127.0.0.1:5900 && fg"]
