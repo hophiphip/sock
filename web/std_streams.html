@@ -1,0 +1,115 @@
+<html>
+<head>
+    <title>STDIN/STDOUT Stream</title>
+        <style>
+            .heading {
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .vnc {
+                /* center horizontally */
+                display:block;
+                margin: 0 auto;
+            }
+
+            .link {
+                text-align: center;
+                display: block;
+                margin: 20px auto;
+            }
+        </style>
+        <style>
+          .status-dot {
+            height: 25px;
+            width: 25px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* Float four columns side by side */
+      .column {
+        float: left;
+        width: 25%;
+        padding: 0 10px;
+      }
+
+      /* Remove extra left and right margins, due to padding in columns */
+      .row {margin: 0 -5px;}
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Style the counter cards */
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+      }
+
+      /* Responsive columns - one column layout (vertical) on small screens */
+      @media screen and (max-width: 600px) {
+        .column {
+          width: 100%;
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+
+      .home {
+        background-color: #fff;
+        color: black; /* Black text color */
+        display: block; /* Make the links appear below each other */
+        padding: 12px; /* Add some padding */
+        padding-bottom: 25px; /* Add some padding */
+        text-decoration: none; /* Remove underline from links */
+        margin: 0;
+      }
+      
+      .home:hover {
+        background-color: #ccc; /* Dark grey background on mouse-over */
+      }
+
+      .link {
+        background-color: #eee; /* Grey background color */
+        color: black; /* Black text color */
+        display: block; /* Make the links appear below each other */
+        padding: 12px; /* Add some padding */
+        text-decoration: none; /* Remove underline from links */
+        height: 100px;
+      }
+
+      .link:hover {
+        background-color: #ccc; /* Dark grey background on mouse-over */
+      }
+    </style>
+</head>
+<body>
+    <a class="home" href="index.html">Home</a>
+    
+    <br>
+    <br>
+    
+    <h1 class="heading">STDIN/STDOUT Logging preview</h1>
+        
+    <!-- TODO: Just a hardcoded string: find a way to pass URL from container to HOST -->
+    <iframe class="vnc" src="http://localhost:8080" title="Container VNC" width="70%" height="70%"></iframe>
+
+    <a class="link" href="http://localhost:8080" target="_blank">Link to the application</a> 
+</body>
+</html>
