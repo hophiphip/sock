@@ -4,9 +4,8 @@
       .status-dot {
         height: 25px;
         width: 25px;
-        background-color: #bbb;
+        background-color: #aaa;
         border-radius: 50%;
-        display: inline-block;
       }
 
       * {
@@ -21,7 +20,8 @@
       .column {
         float: left;
         width: 25%;
-        padding: 0 10px;
+        /* top right bottom left */ 
+        padding: 20px 20px 0 20px;
       }
 
       /* Remove extra left and right margins, due to padding in columns */
@@ -37,6 +37,13 @@
       /* Style the counter cards */
       .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+      }
+      
+      .card:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* this adds the "card" effect */
         padding: 16px;
         text-align: center;
         background-color: #f1f1f1;
@@ -66,16 +73,12 @@
       }
 
       .link {
-        background-color: #eee; /* Grey background color */
+        background-color: #f1f1f1; /* Grey background color */
         color: black; /* Black text color */
         display: block; /* Make the links appear below each other */
         padding: 12px; /* Add some padding */
         text-decoration: none; /* Remove underline from links */
         height: 100px;
-      }
-
-      .link:hover {
-        background-color: #ccc; /* Dark grey background on mouse-over */
       }
     </style>
   </head>
@@ -89,20 +92,72 @@
       <div class="column">
         <div class="card">
           <a class="link" href="std_streams.html">STDIN/STDOUT Stream</a>
+          <div id="std-streams-dot" class="status-dot"></div>
         </div>
       </div>
       
       <div class="column">
         <div class="card">
           <a class="link" href="vnc_viewer.html">VNC Viewer</a>
+          <div id="vnc-viewer-dot" class="status-dot"></div>
         </div>
       </div>
   
       <div class="column">
         <div class="card">
           <a class="link" href="qemu_viewer.html">QEMU Viewer</a>
+          <div id="qemu-viewer-dot" class="status-dot"></div>
         </div>
       </div>
+    </div>
+
+    <div id="scripts">
+      <script type="text/javascript">
+        var stdDot  = document.getElementById("std-streams-dot");
+        var vncDot  = document.getElementById("vnc-viewer-dot");
+        var qemuDot = document.getElementById("qemu-viewer-dot");
+
+        stdDot.style["background-color"]  = "#aaa";
+        vncDot.style["background-color"]  = "#aaa";
+        qemuDot.style["background-color"] = "#aaa";
+
+        const res_actions = [
+          {
+            resource: "http://localhost:8080",
+            action: (isOk) => isOk ?
+              stdDot.style["background-color"] = "#00FF00" :
+              stdDot.style["background-color"] = "#FF0000"
+          }, 
+
+          {
+            resource: "http://localhost:6080/vnc.html",
+            action: (isOk) => isOk ?
+              vncDot.style["background-color"] = "#00FF00" :
+              vncDot.style["background-color"] = "#FF0000",
+          },
+
+          {
+            resource: "http://localhost:6090/vnc.html",
+            action: (isOk) => isOk ?
+              qemuDot.style["background-color"] = "#00FF00" :
+              qemuDot.style["background-color"] = "#FF0000", 
+          }
+        ];
+
+        // Workaround for CORS
+        // we just need to test accessibility of local containers
+        res_actions.forEach(function testResource(res) {
+          var stat = document.createElement('script');
+          stat.type = 'text/javascript';
+          stat.async = true;
+          stat.src = res.resource;
+
+          stat.addEventListener("load", () => res.action(true));
+
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(stat, s);
+        });
+      </script>
     </div>
   </body>
 </html>

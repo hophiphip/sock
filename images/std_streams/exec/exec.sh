@@ -1,3 +1,5 @@
 #!/bin/sh
 
-ls -la
+echo "Enter text:"
+read -r input
+echo "Provided text: $input"
