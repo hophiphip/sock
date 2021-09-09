@@ -1,37 +1,55 @@
 <html>
 <head>
-    <title>STDIN/STDOUT Stream</title>
-        <style>
-            .heading {
-                text-align: center;
-                display: block;
-                margin: 0 auto;
-            }
+    <title>STDIN/STDOUT Streaming</title>
+    <!-- Markdown related -->
+    <link rel="stylesheet" href="./css/github-markdown.css">
+    <style>
+      	.markdown-body {
+	        box-sizing: border-box;
+	        min-width: 200px;
+	        max-width: 980px;
+	        margin: 0 auto;
+	        padding: 45px;
+	      }
 
-            .vnc {
-                /* center horizontally */
-                display:block;
-                margin: 0 auto;
-            }
+	      @media (max-width: 767px) {
+		      .markdown-body {
+			      padding: 15px;
+		      }
+	      }
+    </style>
 
-            .link {
-                text-align: center;
-                display: block;
-                margin: 20px auto;
-            }
-        </style>
-        <style>
-          .status-dot {
-            height: 25px;
-            width: 25px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
+    <style>
+          .heading {
+              text-align: center;
+              display: block;
+              margin: 0 auto;
           }
 
-          * {
-            box-sizing: border-box;
+          .vnc {
+              /* center horizontally */
+              display:block;
+              margin: 0 auto;
           }
+
+          .link {
+              text-align: center;
+              display: block;
+              margin: 20px auto;
+          }
+    </style>
+    <style>
+        .status-dot {
+          height: 25px;
+          width: 25px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
 
       body {
         font-family: Arial, Helvetica, sans-serif;
@@ -106,10 +124,39 @@
     <br>
     
     <h1 class="heading">STDIN/STDOUT Logging preview</h1>
+
+    <div id="readme" class="markdown-body"></div>
         
     <!-- TODO: Just a hardcoded string: find a way to pass URL from container to HOST -->
     <iframe class="vnc" src="http://localhost:8080" title="Container VNC" width="70%" height="70%"></iframe>
 
     <a class="link" href="http://localhost:8080" target="_blank">Link to the application</a> 
+
+    <div id="scripts">
+      <script>
+        const repo = 'https://raw.githubusercontent.com/hophiphip/sockd/master/README.md';
+
+        // Fetching repository contents in HTML
+        // Converts text(.md) to HTML via github API
+        fetch(repo)
+          .then((response) => {
+            response.text().then((text) => {
+              fetch('https://api.github.com/markdown', {
+                headers: {
+                  'Accept' : 'application/vnd.github.v3+json'
+                },
+                method: 'POST',
+                body: JSON.stringify({ "text" : text }),
+              })
+                .then((response) => {
+                  response.text().then((text) => {
+                    document.getElementById('readme').innerHTML = text;
+                  });
+                });
+            });
+          });
+
+      </script>
+    </div>
 </body>
 </html>
